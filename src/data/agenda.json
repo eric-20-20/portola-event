@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Arrivals + Check-in",
+    "start": "2025-10-20T12:30:00",
+    "end": "2025-10-20T14:00:00",
+    "location": "Fireside Room & Patio",
+    "notes": "",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Welcome + Opening Meditation",
+    "start": "2025-10-20T14:00:00",
+    "end": "2025-10-20T14:20:00",
+    "location": "Riviera Ballroom",
+    "notes": "Amy Budden — welcome remarks then meditation",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Conversation 1",
+    "start": "2025-10-20T14:20:00",
+    "end": "2025-10-20T15:00:00",
+    "location": "Riviera Ballroom",
+    "notes": "Steve Huffman & Adam Foroughi",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Conversation 2",
+    "start": "2025-10-20T15:00:00",
+    "end": "2025-10-20T15:30:00",
+    "location": "Riviera Ballroom",
+    "notes": "TBD",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Break",
+    "start": "2025-10-20T15:30:00",
+    "end": "2025-10-20T15:45:00",
+    "location": "Riviera Ballroom",
+    "notes": "",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Conversation 3",
+    "start": "2025-10-20T15:45:00",
+    "end": "2025-10-20T16:15:00",
+    "location": "Riviera Ballroom",
+    "notes": "David Steinberg, Jason Kwon, Matt Sanchez",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Group Activity — Dunk Tank",
+    "start": "2025-10-20T16:15:00",
+    "end": "2025-10-20T17:45:00",
+    "location": "Pacific Lawn",
+    "notes": "Cynthia Frelund hosting, music",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Break",
+    "start": "2025-10-20T17:45:00",
+    "end": "2025-10-20T18:45:00",
+    "location": "Guest Rooms",
+    "notes": "",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Cocktail Hour",
+    "start": "2025-10-20T18:45:00",
+    "end": "2025-10-20T19:30:00",
+    "location": "Wishing Well Lawn",
+    "notes": "Lawn Games, Honey/Bee Experience, Music",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Dinner",
+    "start": "2025-10-20T19:30:00",
+    "end": "2025-10-20T21:00:00",
+    "location": "Arbor & Lily Pond",
+    "notes": "",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "The h.wood Group Experience",
+    "start": "2025-10-20T21:00:00",
+    "end": "2025-10-20T23:30:00",
+    "location": "Upper Dining Terrace + Dining Room",
+    "notes": "9:00–9:30 pm: Upper Dining Terrace; 9:30–11:30 pm: Dining Room (1 hr band, 1 hr DJ); 11:30 pm+: Spontaneous Karaoke",
+    "date": "2025-10-20"
+  },
+  {
+    "name": "Coffee Bar",
+    "start": "2025-10-21T07:00:00",
+    "end": "2025-10-21T09:30:00",
+    "location": "Lobby",
+    "notes": "",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Breakfast",
+    "start": "2025-10-21T07:00:00",
+    "end": "2025-10-21T09:30:00",
+    "location": "Dining Terrace",
+    "notes": "",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Conversation 4",
+    "start": "2025-10-21T09:30:00",
+    "end": "2025-10-21T09:50:00",
+    "location": "Riviera Ballroom",
+    "notes": "Chris Licht & TBD Host",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Conversation 5",
+    "start": "2025-10-21T09:50:00",
+    "end": "2025-10-21T10:10:00",
+    "location": "Riviera Ballroom",
+    "notes": "JC Btaiche & Lynn Jurich",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Conversation 6",
+    "start": "2025-10-21T10:10:00",
+    "end": "2025-10-21T10:30:00",
+    "location": "Riviera Ballroom",
+    "notes": "Max Hodak — Solo slide presentation",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Conversation 7",
+    "start": "2025-10-21T10:30:00",
+    "end": "2025-10-21T11:00:00",
+    "location": "Riviera Ballroom",
+    "notes": "Andrew Robertson — Solo presentation",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Wrap + Closing Meditation",
+    "start": "2025-10-21T11:00:00",
+    "end": "2025-10-21T11:15:00",
+    "location": "Riviera Ballroom",
+    "notes": "Amy Budden — meditation then closing",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Lunch",
+    "start": "2025-10-21T11:15:00",
+    "end": "2025-10-21T12:00:00",
+    "location": "The Dining Room Terrace",
+    "notes": "",
+    "date": "2025-10-21"
+  },
+  {
+    "name": "Bye",
+    "start": "2025-10-21T12:00:00",
+    "end": "2025-10-21T13:00:00",
+    "location": "Fireside Room + Patio",
+    "notes": "",
+    "date": "2025-10-21"
+  }
+]
