@@ -4,7 +4,7 @@ type Item = {
   id: string;
   type: "faq" | "agenda" | "guest";
   text: string;
-  meta?: Record<string, any>;
+  meta?: Record<string, unknown>;
   embedding: number[];
 };
 

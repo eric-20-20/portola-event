@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Portola Event",
-  description: "Event information and chat assistant",
+  description: "Your concierge for the Portola Retreat",
 };
 
 export default function RootLayout({
@@ -24,42 +25,42 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Navigation bar */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* ✅ Header goes here */}
         <header
-  style={{
-    padding: "12px 20px",
-    borderBottom: "1px solid #eee",
-    background: "#fff",
-    position: "sticky",
-    top: 0,
-    zIndex: 10,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  }}
->
-  <a
-    href="/"
-    style={{
-      fontWeight: 700,
-      fontSize: "18px",
-      color: "#111",
-      textDecoration: "none",
-    }}
-  >
-    🪩 Portola
-  </a>
+          style={{
+            padding: "12px 16px",
+            borderBottom: "1px solid #eee",
+            position: "sticky",
+            top: 0,
+            background: "#fff",
+            zIndex: 10,
+          }}
+        >
+          <Link
+            href="/"
+            style={{
+              fontWeight: 700,
+              fontSize: "18px",
+              color: "#111",
+              textDecoration: "none",
+              marginRight: "20px",
+            }}
+          >
+            🪩 Portola
+          </Link>
 
-  <nav style={{ display: "flex", gap: 16 }}>
-    <a href="/agenda">Agenda</a>
-    <a href="/guests">Guests</a>
-    <a href="/map">Map</a>
-  </nav>
-</header>
+          <nav style={{ display: "inline-flex", gap: 16 }}>
+            <Link href="/agenda">Agenda</Link>
+            <Link href="/guests">Guests</Link>
+            <Link href="/map">Map</Link>
+          </nav>
+        </header>
 
-        {/* Main content */}
-        <main style={{ padding: 16, maxWidth: 900, margin: "0 auto" }}>{children}</main>
+        {/* This renders the page content below the header */}
+        {children}
       </body>
     </html>
   );
