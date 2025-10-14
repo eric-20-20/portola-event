@@ -3,15 +3,16 @@ import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { retrieve } from "@/lib/search";
 
-// Types used for history/messaging
 type ChatRole = "user" | "assistant" | "system";
 type ChatMessage = { role: ChatRole; content: string };
 
-// Portola’s personality & behavior
-const SYSTEM = `You are Portola — a warm, confident event concierge for the Portola Retreat.
-Answer conversationally and helpfully. Use the provided Context when relevant.
-If you don’t know, say so briefly and point to Agenda/Map/Info Desk.
-Tone: professional yet relaxed, like a 5-star resort host.`;
+const SYSTEM = `You are Portola — an event concierge for the Portola Retreat.
+STRICT POLICY:
+- Answer ONLY using the Context provided.
+- If the answer is not clearly in Context, say: "I’m not sure — please check the Agenda or Map"
+- Be concise (1–2 sentences). Include exact times/locations when present.
+- Do NOT invent people, times, or locations.
+- Make sure to double check before you give an answer.`;
 
 function buildContext(chunks: { type: string; text: string }[]) {
   return chunks.map((c, i) => `[${i + 1} | ${c.type}] ${c.text}`).join("\n");
@@ -23,49 +24,51 @@ export async function POST(req: Request) {
       message?: string;
       history?: ChatMessage[];
     };
-
     const q = (message ?? "").trim();
-    if (!q) {
-      return NextResponse.json({ answer: "Hey there 👋 How can I help you?" });
-    }
+    if (!q) return NextResponse.json({ answer: "Hi! Ask me about times, locations, or guests.", sources: [] });
 
-    // ✅ Lazy-create the OpenAI client at runtime (safer for Vercel builds)
     const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-      console.error("OPENAI_API_KEY missing in environment");
-      return NextResponse.json(
-        { answer: "Portola’s brain isn’t configured yet. (Missing API key)" },
-        { status: 500 }
-      );
-    }
+    if (!apiKey) return NextResponse.json({ answer: "Server is missing OPENAI_API_KEY." }, { status: 500 });
     const client = new OpenAI({ apiKey });
 
-    // Retrieve relevant chunks from your index
-    const relevant = await retrieve(q, 6);
-    const context = buildContext(relevant.map((r) => ({ type: r.type, text: r.text })));
+    // Retrieve & apply a similarity threshold
+    const top = await retrieve(q, 6); // each item now includes .score
+    const MIN_SCORE = 0.75; // tweak 0.70–0.80 based on your data
+    const strong = top.filter(t => (t as any).score >= MIN_SCORE);
+    const used = strong.length > 0 ? strong : top.slice(0, 2); // always give model something
 
-    // History (memory) — validate to our type
-    const pastMessages: ChatMessage[] = Array.isArray(history) ? history : [];
+    const context = buildContext(used.map(t => ({ type: t.type, text: t.text })));
 
-    // Build conversation
+    const past: ChatMessage[] = Array.isArray(history) ? history : [];
     const messages: ChatMessage[] = [
       { role: "system", content: SYSTEM },
-      { role: "user", content: `Context:\n${context}\n\nContinue the chat naturally.` },
-      ...pastMessages,
-      { role: "user", content: q },
+      { role: "user", content: `Context:\n${context}\n\nUser: ${q}\nAssistant:` },
+      ...past,
     ];
 
-    // Call the model
+    // If context is weak, short-circuit without calling the model
+    if (strong.length === 0) {
+      return NextResponse.json({
+        answer: "I’m not sure — please check the Agenda, Map, or Info Desk.",
+        sources: used.map(u => ({ id: u.id, type: u.type })),
+      });
+    }
+
     const rsp = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      temperature: 0.7,
+      temperature: 0,
       messages,
     });
 
-    const answer = rsp.choices?.[0]?.message?.content?.trim() || "Sorry, I’m not sure.";
-    return NextResponse.json({ answer });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ answer: "Oops! Something went wrong." }, { status: 500 });
+    const answer = rsp.choices?.[0]?.message?.content?.trim()
+      || "I’m not sure — please check the Agenda, Map, or Info Desk.";
+
+    return NextResponse.json({
+      answer,
+      sources: used.map(u => ({ id: u.id, type: u.type })),
+    });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ answer: "Sorry, something went wrong." }, { status: 500 });
   }
 }
