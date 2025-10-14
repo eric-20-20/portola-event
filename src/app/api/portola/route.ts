@@ -17,10 +17,9 @@ type AgendaItem = {
   date: string; // "2025-10-20"
 };
 
-// Cast agenda to a typed array
 const AGENDA: AgendaItem[] = agenda as unknown as AgendaItem[];
 
-// ---------- Helpers: deterministic day summary ----------
+// ---------- Helpers (dates & formatting) ----------
 const DAY_MAP: Record<string, string> = {
   monday: "2025-10-20",
   tuesday: "2025-10-21",
@@ -30,21 +29,36 @@ function looksLikeDayQuery(q: string): boolean {
   const s = q.toLowerCase();
   return s.includes("monday") || s.includes("tuesday");
 }
-
 function pickDayFromQuery(q: string): string | null {
   const s = q.toLowerCase();
   if (s.includes("monday")) return DAY_MAP.monday;
   if (s.includes("tuesday")) return DAY_MAP.tuesday;
   return null;
 }
-
+function isOverviewDayQuery(q: string): boolean {
+  // broad “what’s on … / agenda … / schedule …”
+  return /(what'?s|whats|what is|agenda|schedule).*(monday|tuesday)/i.test(q);
+}
+function hasQualifier(q: string): boolean {
+  return /(first|last|morning|afternoon|evening|where|when|time|location|dinner|breakfast|lunch|cocktail)/i.test(
+    q.toLowerCase(),
+  );
+}
+function itemsForDay(date: string): AgendaItem[] {
+  return AGENDA.filter((it) => it.date === date).sort((a, b) =>
+    (a.start ?? "").localeCompare(b.start ?? ""),
+  );
+}
 function fmtTime(t?: string | null): string {
   if (!t) return "";
   return new Date(t).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 }
-
+function fmtItem(it: AgendaItem): string {
+  const time = `${fmtTime(it.start)}${it.end ? `–${fmtTime(it.end)}` : ""}`;
+  return `${time} • ${it.name} — ${it.location}`;
+}
 function summarizeDayStrict(date: string): string | null {
-  const items = AGENDA.filter((it) => it.date === date);
+  const items = itemsForDay(date);
   if (!items.length) return null;
 
   const pretty = new Date(`${date}T00:00:00`).toLocaleDateString([], {
@@ -52,21 +66,37 @@ function summarizeDayStrict(date: string): string | null {
     month: "long",
     day: "numeric",
   });
-
-  const lines = items.map((it) => {
-    const time = `${fmtTime(it.start)}${it.end ? `–${fmtTime(it.end)}` : ""}`;
-    return `- ${time} • ${it.name} — ${it.location}`;
-  });
-
-  return `Schedule for ${pretty}:\n${lines.join("\n")}`;
+  const lines = items.map(fmtItem).join("\n");
+  return `Schedule for ${pretty}:\n${lines}`;
+}
+function firstItem(date: string) {
+  const list = itemsForDay(date);
+  return list.length ? list[0] : null;
+}
+function lastItem(date: string) {
+  const list = itemsForDay(date);
+  return list.length ? list[list.length - 1] : null;
+}
+function inPartOfDay(
+  date: string,
+  part: "morning" | "afternoon" | "evening",
+): AgendaItem[] {
+  const list = itemsForDay(date);
+  const hourOf = (iso?: string | null) => (iso ? new Date(iso).getHours() : -1);
+  const within = (h: number) =>
+    part === "morning" ? h >= 5 && h < 12 : part === "afternoon" ? h >= 12 && h < 17 : h >= 17 && h <= 23;
+  return list.filter((it) => within(hourOf(it.start)));
+}
+function prettyWeekday(date: string) {
+  return new Date(`${date}T00:00:00`).toLocaleDateString([], { weekday: "long" });
 }
 
-// ---------- LLM system prompt (strict, no rewriting) ----------
+// ---------- LLM system prompt (strict) ----------
 const SYSTEM = `You are Portola — an event concierge for the Portola Retreat.
 STRICT RULES:
 - Answer ONLY using the provided Context verbatim; do not change dates or times.
 - If the answer is not present in Context, say: "I’m not sure — please check the Agenda or Map."
-- Keep answers to 1–2 sentences (or a short bullet list when summarizing multiple items).
+- Keep answers concise (1–2 sentences) or a short bullet list for multiple items.
 - Do NOT invent people, times, or locations.`;
 
 // ---------- API handler ----------
@@ -78,65 +108,110 @@ export async function POST(req: Request) {
     };
 
     const q = (message ?? "").trim();
-    if (!q) {
-      return NextResponse.json({
-        answer: "Hey there 👋 How can I help you today?",
-      });
-    }
+    if (!q) return NextResponse.json({ answer: "Hey there 👋 How can I help you today?" });
 
-    // 🔒 Deterministic answer for day queries (no LLM)
+    // --- Day queries: safe, smart handling ---
     if (looksLikeDayQuery(q)) {
       const day = pickDayFromQuery(q);
-      const summary = day ? summarizeDayStrict(day) : null;
-      if (summary) {
-        return NextResponse.json({ answer: summary });
+      if (day) {
+        // 1) Overview (e.g., “what’s on Monday”) => deterministic summary
+        if (isOverviewDayQuery(q) && !hasQualifier(q)) {
+          const summary = summarizeDayStrict(day);
+          if (summary) return NextResponse.json({ answer: summary });
+        }
+
+        // 2) Deterministic specifics
+        const lower = q.toLowerCase();
+        if (/\bfirst\b/.test(lower)) {
+          const it = firstItem(day);
+          if (it) return NextResponse.json({ answer: `First on ${prettyWeekday(day)}: ${fmtItem(it)}` });
+        }
+        if (/\blast\b/.test(lower)) {
+          const it = lastItem(day);
+          if (it) return NextResponse.json({ answer: `Last on ${prettyWeekday(day)}: ${fmtItem(it)}` });
+        }
+        if (/\bmorning\b/.test(lower) || /\bafternoon\b/.test(lower) || /\bevening\b/.test(lower)) {
+          const part = /\bmorning\b/.test(lower)
+            ? "morning"
+            : /\bafternoon\b/.test(lower)
+            ? "afternoon"
+            : "evening";
+          const list = inPartOfDay(day, part);
+          if (list.length) {
+            return NextResponse.json({
+              answer:
+                `${part[0].toUpperCase() + part.slice(1)} on ${prettyWeekday(day)}:\n` +
+                list.map(fmtItem).join("\n"),
+            });
+          }
+        }
+
+        // 3) Other specific Monday/Tuesday questions:
+        //    use LLM but restrict context to that day’s items only
+        const dayContext = itemsForDay(day).map(fmtItem).join("\n");
+
+        const apiKey = process.env.OPENAI_API_KEY;
+        if (!apiKey) {
+          console.error("Missing OPENAI_API_KEY");
+          return NextResponse.json(
+            { answer: "Server is not configured (missing API key)." },
+            { status: 500 },
+          );
+        }
+        const client = new OpenAI({ apiKey });
+
+        const messages: ChatMessage[] = [
+          { role: "system", content: SYSTEM },
+          {
+            role: "user",
+            content: `Context (items for ${prettyWeekday(day)}):\n${dayContext}\n\nUser: ${q}\nAssistant:`,
+          },
+        ];
+        const rsp = await client.chat.completions.create({
+          model: "gpt-4o-mini",
+          temperature: 0,
+          messages,
+        });
+        const answer =
+          rsp.choices?.[0]?.message?.content?.trim() ||
+          "I’m not sure — please check the Agenda or Map.";
+        return NextResponse.json({ answer });
       }
     }
 
-    // ✅ Create OpenAI client at runtime (Vercel-safe)
+    // --- General questions: normal RAG with strict prompt ---
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       console.error("Missing OPENAI_API_KEY");
-      return NextResponse.json(
-        { answer: "Server is not configured (missing API key)." },
-        { status: 500 }
-      );
+      return NextResponse.json({ answer: "Server is not configured (missing API key)." }, { status: 500 });
     }
     const client = new OpenAI({ apiKey });
 
-    // 1) Retrieve relevant context (no strict cutoff)
-    const results = await retrieve(q, 6);
-    const context = results
-      .map((r, i) => `[${i + 1} | ${r.type}] ${r.text}`)
-      .join("\n");
-
-    // 2) History (memory)
+    const results = await retrieve(q, 6); // no hard cutoff
+    const context = results.map((r, i) => `[${i + 1} | ${r.type}] ${r.text}`).join("\n");
     const past: ChatMessage[] = Array.isArray(history) ? history : [];
 
-    // 3) Compose messages
     const messages: ChatMessage[] = [
       { role: "system", content: SYSTEM },
       { role: "user", content: `Context:\n${context}\n\nUser: ${q}\nAssistant:` },
       ...past,
     ];
 
-    // 4) Ask the model (factual)
     const rsp = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      temperature: 0, // keep factual to avoid rewriting dates/times
+      temperature: 0, // factual
       messages,
     });
 
     const answer =
       rsp.choices?.[0]?.message?.content?.trim() ||
       "I’m not sure — please check the Agenda or Map.";
-
     return NextResponse.json({ answer });
   } catch (err) {
     console.error("Portola API error:", err);
     return NextResponse.json(
       { answer: "Oops! Something went wrong — please try again." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
