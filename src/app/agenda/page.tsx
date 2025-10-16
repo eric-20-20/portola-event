@@ -1,70 +1,64 @@
-import agenda from "@/data/agenda.json";
-
-type Item = {
-  name: string;
-  start: string | null;
-  end: string | null;
-  location: string;
-  notes?: string;
-  date: string; // YYYY-MM-DD
-};
-
-function fmtTime(t?: string | null) {
-  if (!t) return "";
-  return new Date(t).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-}
-
-function groupByDate(items: Item[]) {
-  return items.reduce<Record<string, Item[]>>((acc, it) => {
-    (acc[it.date] ||= []).push(it);
-    return acc;
-  }, {});
-}
+import Image from "next/image";
 
 export default function AgendaPage() {
-  const items = agenda as Item[];
-  const grouped = groupByDate(items);
-  const days = Object.keys(grouped).sort();
-
   return (
-    <div style={{ padding: "20px", maxWidth: "700px", margin: "0 auto" }}>
-      <h1 style={{ marginBottom: "16px" }}>Agenda</h1>
+    <main
+      style={{
+        maxWidth: 980,
+        margin: "0 auto",
+        padding: "24px 16px 48px",
+      }}
+    >
+      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 20 }}>
+        Event Agenda
+      </h1>
 
-      {days.map((d, idx) => {
-        const pretty = new Date(`${d}T00:00:00`).toLocaleDateString([], {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-        });
+      <section style={{ marginBottom: 40 }}>
+        <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 10 }}>
+          Monday, October 20
+        </h2>
+        <div
+          style={{
+            borderRadius: 12,
+            overflow: "hidden",
+            boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+            border: "1px solid #eee",
+            background: "#fff",
+          }}
+        >
+          <Image
+            src="/agenda/monday.png" // <- change if your filename/extension differs
+            alt="Monday Agenda"
+            width={1600}
+            height={2200}
+            style={{ width: "100%", height: "auto", display: "block" }}
+            priority
+          />
+        </div>
+      </section>
 
-        return (
-          <section key={d} style={{ marginBottom: "32px" }}>
-            <h2 style={{ color: "#4A6CF7", marginBottom: "12px" }}>
-              {`Day ${idx + 1}: ${pretty}`}
-            </h2>
-
-            <ul style={{ listStyle: "none", padding: 0 }}>
-              {grouped[d].map((it, i) => (
-                <li
-                  key={i}
-                  style={{
-                    borderBottom: "1px solid #eee",
-                    padding: "10px 0",
-                  }}
-                >
-                  <div style={{ fontWeight: 600 }}>{it.name}</div>
-                  <div style={{ color: "#555" }}>
-                    {fmtTime(it.start)}{it.end ? ` – ${fmtTime(it.end)}` : ""} • {it.location}
-                  </div>
-                  {it.notes && (
-                    <div style={{ color: "#777", marginTop: 4 }}>{it.notes}</div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })}
-    </div>
+      <section>
+        <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 10 }}>
+          Tuesday, October 21
+        </h2>
+        <div
+          style={{
+            borderRadius: 12,
+            overflow: "hidden",
+            boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
+            border: "1px solid #eee",
+            background: "#fff",
+          }}
+        >
+          <Image
+            src="/agenda/tuesday.png" // <- change if your filename/extension differs
+            alt="Tuesday Agenda"
+            width={1600}
+            height={2200}
+            style={{ width: "100%", height: "auto", display: "block" }}
+          />
+        </div>
+      </section>
+    </main>
   );
 }

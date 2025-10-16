@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi, I’m Portola 👋 How can I help you today?" },
+    { role: "assistant", content: "Hi, I'm Portola. A little chat bot, coded by Jeff and Nikki, and here to help you." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
