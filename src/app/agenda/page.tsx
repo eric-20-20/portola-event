@@ -27,7 +27,7 @@ export default function AgendaPage() {
           }}
         >
           <Image
-            src="/agenda/monday.png" // <- change if your filename/extension differs
+            src="/agenda/monday.png" 
             alt="Monday Agenda"
             width={1600}
             height={2200}
@@ -51,7 +51,7 @@ export default function AgendaPage() {
           }}
         >
           <Image
-            src="/agenda/tuesday.png" // <- change if your filename/extension differs
+            src="/agenda/tuesday.png" 
             alt="Tuesday Agenda"
             width={1600}
             height={2200}
