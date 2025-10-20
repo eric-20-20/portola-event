@@ -1,8 +1,18 @@
 // scripts/enrich-guests.mjs
 import fs from "fs/promises";
 
-const GUESTS_SRC = "src/data/guests.json";           // your existing list
-const OUT = "src/data/guests.enriched.json";         // new enriched file
+const GUESTS_SRC = "src/data/guests.json";
+const OUT = "src/data/guests.enriched.json";
+
+function normGuest(g) {
+  return {
+    name: g.name ?? g.Name ?? "",
+    title: g.title ?? g.Title ?? "",
+    company: g.company ?? g.Company ?? "",
+    photo: g.photo ?? g.Photo ?? null,
+    wikipedia: g.wikipedia ?? g.Wikipedia ?? null,
+  };
+}
 
 async function wikiSearchTitle(q) {
   const url = `https://en.wikipedia.org/w/rest.php/v1/search/title?q=${encodeURIComponent(q)}&limit=1`;
@@ -30,32 +40,28 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function main() {
   const raw = JSON.parse(await fs.readFile(GUESTS_SRC, "utf8"));
+  const baseGuests = raw.map(normGuest);
+
   const out = [];
-
-  for (const g of raw) {
-    // Keep what you already have
-    const base = { name: g.name, title: g.title, company: g.company };
-
-    // Try exact title for better hits; fall back to name+company
-    const q = g.wikipedia || g.name;
-    let title = await wikiSearchTitle(q);
-    if (!title && g.company) title = await wikiSearchTitle(`${g.name} ${g.company}`);
-
+  for (const g of baseGuests) {
+    const q = g.wikipedia || g.name || `${g.name} ${g.company}`.trim();
     let wiki = null;
-    if (title) wiki = await wikiSummary(title);
+    if (q) {
+      const t1 = await wikiSearchTitle(q);
+      const t2 = t1 || (g.company ? await wikiSearchTitle(`${g.name} ${g.company}`) : null);
+      if (t2) wiki = await wikiSummary(t2);
+      await sleep(200);
+    }
 
     out.push({
-      ...base,
-      wiki: wiki ? {
-        title: wiki.title,
-        summary: wiki.extract,
-        description: wiki.description,
-        image: wiki.image,
-        url: wiki.url,
-      } : null,
+      name: g.name,
+      title: g.title,
+      company: g.company,
+      photo: g.photo,
+      wiki: wiki
+        ? { title: wiki.title, summary: wiki.extract, description: wiki.description, image: wiki.image, url: wiki.url }
+        : null,
     });
-
-    await sleep(200); // be polite to Wikipedia
   }
 
   await fs.writeFile(OUT, JSON.stringify(out, null, 2), "utf8");

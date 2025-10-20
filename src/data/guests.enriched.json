@@ -1,542 +1,695 @@
 [
   {
-    "name": "Aaron Karo",
+    "name": "",
     "title": "#1 New York Times bestselling author, comedian, screenwriter, podcaster",
     "company": "Self-Employed",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Adam Foroughi",
-    "title": "",
-    "company": "",
+    "name": "",
+    "title": "Co-Founder and CEO",
+    "company": "Applovin",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Adam Goldstein",
+    "name": "",
     "title": "Co-founder",
     "company": "Softmax",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Adam Jackson",
-    "title": "founder / CEO",
+    "name": "",
+    "title": "Founder / CEO",
     "company": "Braintrust",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Al Guerrero",
+    "name": "",
     "title": "Managing Director",
     "company": "Stifel Bank",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Alex Bard",
+    "name": "",
     "title": "Managing Director",
     "company": "Redpoint Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Alex Pall",
+    "name": "",
     "title": "General Partner",
     "company": "MANTIS Venture Capital",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Allison Salisbury",
+    "name": "",
     "title": "Founder & CEO",
     "company": "Humanist",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Amy Budden",
+    "name": "",
     "title": "Founder",
     "company": "Connect the Mind",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Anand Murthy",
+    "name": "",
     "title": "Partner",
     "company": "Queensbridge Venture  Partners",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Andrew Robertson",
+    "name": "",
     "title": "Chairman",
     "company": "BBDO Worldwide",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Apurva Mehta",
+    "name": "",
+    "title": "Co-founder, SVP, Limited Partner",
+    "company": "Upstart/ Mythos Ventures",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Managing Partner",
     "company": "Summit Peak",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Arjun Bhatnagar",
+    "name": "",
     "title": "CEO",
     "company": "Cloaked",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Benjamine Liu",
+    "name": "",
     "title": "CEO/Co-Founder",
     "company": "Formation Bio",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Brent Weinstein",
+    "name": "",
     "title": "Partner",
     "company": "CAA",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Cameron Schiller",
-    "title": "ceo",
+    "name": "",
+    "title": "CEO",
     "company": "rangeview",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Casey Winters",
+    "name": "",
     "title": "Cofounder & CEO",
     "company": "SuperMe",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Chester Ng",
+    "name": "",
     "title": "General Parter",
     "company": "Atomic",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Chris Licht",
+    "name": "",
     "title": "CEO/Founder Partner",
     "company": "CLC Partners",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Christophe Rimann",
+    "name": "",
     "title": "CEO",
     "company": "Camber",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Claire Rauh McDonough",
+    "name": "",
     "title": "Chief Financial Officer",
     "company": "Rivian",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Cynthia Frelund",
+    "name": "",
     "title": "On-Air Predictive Analytics Expert",
     "company": "National Football League",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Daniel Kan",
+    "name": "",
     "title": "Founder",
     "company": "Fifth Door",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "David Steinberg",
+    "name": "",
     "title": "CEO",
     "company": "Zeta Global",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Dom Wong",
+    "name": "",
     "title": "Founder",
     "company": "Pogo",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Drew Taggart",
+    "name": "",
     "title": "Founding Partner",
     "company": "Mantis",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Elizabeth Hart",
+    "name": "",
     "title": "President of Leasing, North America ",
     "company": "Newmark",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Emmett Shear",
+    "name": "",
     "title": "CEO",
     "company": "Softmax",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Eric Simons",
+    "name": "",
     "title": "CEO & Founder",
     "company": "bolt.new",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Frank Ghali",
+    "name": "",
     "title": "Founder and CEO",
     "company": "Jordan Park Group",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Gaurav Bhogale",
+    "name": "",
     "title": "Principal",
     "company": "Mantis Venture Capital",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Grant Gittlin",
+    "name": "",
     "title": "Investor and Founder",
     "company": "LASAGNA",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Harry Gerstner",
+    "name": "",
     "title": "Founder/CEO",
     "company": "Orion",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Harshith Ramesh",
-    "title": "CEO",
-    "company": "Episource",
-    "wiki": null
-  },
-  {
-    "name": "Heidi Zak",
+    "name": "",
     "title": "Co-Founder & CEO",
     "company": "Thirdlove",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Hooman Radfar",
+    "name": "",
     "title": "Co-Founder and CEO",
     "company": "Collective",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jackson Gates",
+    "name": "",
     "title": "Managing General Partner",
     "company": "Manresa Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "James Reinhart",
+    "name": "",
     "title": "Founder & CEO",
     "company": "thredUP",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jason Kwon",
+    "name": "",
     "title": "Chief Strategy Officer",
     "company": "OpenAI",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "JC Btaiche",
+    "name": "",
     "title": "Founder",
     "company": "Fuse",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jeffrey Evans",
+    "name": "",
+    "title": "Music Manager",
+    "company": "KK Management",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "General Partner",
     "company": "Mantis",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jeremy Levine",
+    "name": "",
     "title": "CEO",
     "company": "Underdog",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jess Mah",
+    "name": "",
     "title": "Founder",
     "company": "Mahway",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Jessie ma",
+    "name": "",
     "title": "CEO, Cofounder",
     "company": "Werkflow",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Joanna Riley",
+    "name": "",
     "title": "CEO & Co-Founder",
     "company": "Censia",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "John Andrew Entwistle",
+    "name": "",
     "title": "Founder and CEO",
     "company": "Wander",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "John Terzian",
+    "name": "",
     "title": "Founder",
     "company": "H Wood Group",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Josh Dorsey",
+    "name": "",
     "title": "Managing Director",
     "company": "Stifel Venture Bank",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Josh Simon",
+    "name": "",
     "title": "CEO",
     "company": "Funko",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Justin Kan",
+    "name": "",
+    "title": "Musician",
+    "company": "Łaszewo",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Partner",
     "company": "Goat Capital",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Justin Mateen",
+    "name": "",
     "title": "Founder",
     "company": "JAM Fund",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Ken Seiff",
+    "name": "",
+    "title": "Music Manager",
+    "company": "KK Management",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
+    "title": "Musician",
+    "company": "Łaszewo",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Managing Partner",
     "company": "Blockchange Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Kevin Reilly",
+    "name": "",
     "title": "CEO",
-    "company": "Inventive Content (I will be attending under different company)",
+    "company": "Kartel AI",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Kim Lewandowski",
+    "name": "",
     "title": "Co-Founder",
     "company": "Chainguard",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Leah Chisholm",
+    "name": "",
+    "title": "Operating Partner",
+    "company": "Headline",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Musical Artist / Activist / Label Owner / W's Global Music Director",
     "company": "LP Giobbi",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Liz Milonopolous",
+    "name": "",
     "title": "Head of Global Internet Investment Banking",
     "company": "Citi",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Lynn Jurich",
+    "name": "",
     "title": "Founder & CEO",
     "company": "FLI MD",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Malisa Gandevani",
+    "name": "",
     "title": "Chief of Staff",
     "company": "Mantis",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Marc Provissiero",
+    "name": "",
     "title": "Co-Founder, Managing Partner",
     "company": "OPE Partners",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Marc Rollins",
+    "name": "",
     "title": "Partner",
     "company": "Jordan Park",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Mario Barth",
+    "name": "",
+    "title": "CEO and Co-Founder",
+    "company": "Burning Man Project",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Founder",
     "company": "Intenze Tattoo Ink",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Matt Sanchez",
+    "name": "",
     "title": "COO",
     "company": "Yahoo",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Max Hodak",
+    "name": "",
+    "title": "Musician",
+    "company": "Łaszewo",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Founder and CEO",
     "company": "Science Corporation",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Max Mullen",
+    "name": "",
     "title": "Co-Founder",
     "company": "Instacart",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Michael Guirguis",
+    "name": "",
     "title": "CEO",
     "company": "Seso",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Milan Koch",
+    "name": "",
     "title": "Founder Partner",
     "company": "Mantis",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Milana Lewis",
+    "name": "",
     "title": "Co-Founder & CEO",
     "company": "Stem",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Natalie Novak",
+    "name": "",
     "title": "Founder & Principal",
     "company": "La Costa Strategies",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Nikki Farb",
+    "name": "",
     "title": "Founder Turned Funder",
     "company": "Power of N Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Nooshin Behroyan",
+    "name": "",
     "title": "Founder/ CEO",
     "company": "PAXON Energy",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Otis Chandler",
+    "name": "",
     "title": "Chief explorer",
     "company": "Exploring",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Paul Rehrig",
+    "name": "",
+    "title": "CRO/SVP REVENUE // Media and Advertising Sales",
+    "company": "Rachel Zoe // former BDG and Vertiqal Studios",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "President",
     "company": "Hagerty",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Paul Strachman",
+    "name": "",
     "title": "Managing Partner",
     "company": "SPAR Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Peter Pham",
+    "name": "",
     "title": "Co-Founder, Managing Director",
     "company": "Science Venture Studio",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Philip Inghelbrecht",
+    "name": "",
     "title": "CEO and Founder",
     "company": "Tatari",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Rachel Zoe",
+    "name": "",
     "title": "CEO",
     "company": "Rachel Zoe",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Rishabh Jain",
+    "name": "",
     "title": "Co-Founder and CEO",
     "company": "FERMÀT",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Russ Fradin",
+    "name": "",
     "title": "Founder / CEO",
     "company": "Larridin, Inc.",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Ryan Braun",
+    "name": "",
     "title": "Managing Director",
     "company": "IEQ",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Ryan Sarver",
+    "name": "",
     "title": "Founder",
     "company": "Forum Ventures",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Sachin Bavishi",
+    "name": "",
     "title": "Senior Managing Director",
     "company": "Blackstone",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Saif Khawaja",
+    "name": "",
     "title": "CEO/Founder",
     "company": "Shinkei",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Satish Dharmaraj",
+    "name": "",
+    "title": "Owner",
+    "company": "Wide Open",
+    "photo": null,
+    "wiki": null
+  },
+  {
+    "name": "",
     "title": "Managing Director",
     "company": "Redpoint",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Saveena Mandadi",
+    "name": "",
     "title": "Principal",
     "company": "Mantis VC",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Steve Huffman",
+    "name": "",
     "title": "CEO",
     "company": "Reddit",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Steve O'Brien",
+    "name": "",
     "title": "investor",
     "company": "Mantis VP",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Taylor Brandt",
+    "name": "",
     "title": "Partner",
     "company": "Headline",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Tom Harries",
+    "name": "",
     "title": "CEO/Founder",
     "company": "Earth",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Yahya Mokhtarzada",
+    "name": "",
     "title": "Founder",
     "company": "Rocket Money",
+    "photo": null,
     "wiki": null
   },
   {
-    "name": "Zach Hudson",
+    "name": "",
     "title": "Co-Founder & CEO",
     "company": "Onton",
+    "photo": null,
     "wiki": null
   }
 ]

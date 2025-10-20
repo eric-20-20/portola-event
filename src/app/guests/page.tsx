@@ -1,100 +1,60 @@
-"use client";
-import guests from "@/data/guests.json";
-import { useMemo, useState } from "react";
+import guestsRaw from "@/data/guests.json"; // use plain guests.json for now (no bios)
 
-type Guest = {
-  name: string;
-  company: string;
-  title: string;
-  bio?: string;
-  headshot_url?: string;
-};
+type Row = Record<string, string | null | undefined>;
+
+function norm(row: Row) {
+  // Try many possible column names and combine first+last when present
+  const first =
+    row["first"] ?? row["First"] ?? row["first_name"] ?? row["First Name"] ?? "";
+  const last =
+    row["last"] ?? row["Last"] ?? row["last_name"] ?? row["Last Name"] ?? "";
+  const fallbackName =
+    [String(first || "").trim(), String(last || "").trim()].filter(Boolean).join(" ") ||
+    String(row["name"] ?? row["Name"] ?? "").trim();
+
+  const title = String(row["title"] ?? row["Title"] ?? "").trim();
+  const company = String(row["company"] ?? row["Company"] ?? "").trim();
+
+  return { name: fallbackName, title, company };
+}
 
 export default function GuestsPage() {
-  const [q, setQ] = useState("");
-  const list = guests as Guest[];
-
-  const filtered = useMemo(() => {
-    const s = q.toLowerCase().trim();
-    if (!s) return list;
-    return list.filter(g =>
-      `${g.name} ${g.company} ${g.title}`.toLowerCase().includes(s)
-    );
-  }, [q, list]);
+  const guests = (guestsRaw as Row[]).map(norm).filter(g => g.name);
 
   return (
-    <div>
-      <h1>Guests</h1>
-
-      <input
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder="Search by name, company, or title"
-        style={{
-          width: "100%",
-          padding: 10,
-          border: "1px solid #ddd",
-          borderRadius: 8,
-          marginBottom: 12,
-        }}
-      />
+    <main style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 16px 48px" }}>
+      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 16 }}>Guests</h1>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 12,
+          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          gap: 16,
         }}
       >
-        {filtered.map((g, i) => (
+        {guests.map((g, i) => (
           <div
-            key={i}
-            style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}
+            key={`${g.name}-${g.company}-${i}`}
+            style={{
+              border: "1px solid #eee",
+              borderRadius: 12,
+              padding: 14,
+              background: "#fff",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.06)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+              minHeight: 96,
+              justifyContent: "center",
+            }}
           >
-            <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-              {g.headshot_url ? (
-                <img
-                  src={g.headshot_url}
-                  alt={g.name}
-                  style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                  }}
-                />
-              ) : (
-                <div
-                  style={{
-                    width: 56,
-                    height: 56,
-                    borderRadius: "50%",
-                    background: "#f2f2f2",
-                    display: "grid",
-                    placeItems: "center",
-                    fontWeight: 700,
-                  }}
-                >
-                  {g.name
-                    .split(" ")
-                    .map((w) => w[0])
-                    .slice(0, 2)
-                    .join("")
-                    .toUpperCase()}
-                </div>
-              )}
-
-              <div>
-                <div style={{ fontWeight: 700 }}>{g.name}</div>
-                <div>{g.title}</div>
-                <div style={{ color: "#666" }}>{g.company}</div>
-              </div>
+            <div style={{ fontWeight: 600, fontSize: 16 }}>{g.name}</div>
+            <div style={{ color: "#555" }}>
+              {[g.title, g.company].filter(Boolean).join(" · ")}
             </div>
-
-            {g.bio && <p style={{ marginTop: 8 }}>{g.bio}</p>}
           </div>
         ))}
       </div>
-    </div>
+    </main>
   );
 }
